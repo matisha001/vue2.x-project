@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>列表渲染</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+<div id="watch">
+	<div v-for="item  in object" >{{ item }}
+	</div>
+	<button v-on:click="warn('Form cannot be submitted yet.', $event)">提交</button>
+	<button v-on:click.stop="warn('Form cannot be submitted yet.')">提交</button>
+	<input v-on:keyup.tab="warn('Form cannot be submitted yet.')">
+ </div>
+
+<script>
+
+var watchExampleVM = new Vue({
+  	el: '#watch',
+	data: {
+	  object: {
+	      FirstName: 'John',
+	      LastName: 'Doe',
+	      Age: 30
+	  }
+	},
+	methods: {
+	  warn: function (message, event) {
+	    // if (event) event.preventDefault()
+	    //Vue.config.keyCodes.f1 = 112
+	    alert(message)
+	  }
+	}
+})
+</script>
+</body>
+</html>

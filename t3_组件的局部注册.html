@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组件的局部注册</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+<div id="example">
+	<comp ></comp>
+</div>
+<script>
+var Child = Vue.extend({ 
+  template:"<span>{{ message }}</span>",
+  data: function(){
+   return {message: 'hello'}
+  },
+})
+new Vue({
+  el: '#example',
+  //局部注册
+  components:{
+  	'comp': Child
+  }
+})
+</script>
+</body>
+</html>

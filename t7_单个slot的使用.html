@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>单个slot的使用</title>
+</head>
+<body>
+  <script src="vue1.js"></script>
+  <template id="child">
+    <div>
+        <slot>
+            如果没有分发内容，这里将会被显示
+        </slot>
+    </div>
+  </template>
+<div id="test"><!-- 父组件模板 -->
+  <h1>I'm the parent title</h1>
+  <my-component>
+    <p>This is some more original content</p>
+  </my-component>
+  <my-component></my-component>
+</div>
+<script>
+  var myComponent = Vue.extend({ template: "#child"});
+  new Vue({
+      el: "#test",
+      components: {
+          "my-component": myComponent
+      }
+  });
+</script>
+</body>
+</html>

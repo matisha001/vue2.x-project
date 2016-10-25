@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script type="text/template">
+	<img src="mm1.jpg">
+</script>
+<!-- 
+<script>本身的特定，让内部的HTML标签是按照字符串处理的
+-->
+<textarea style="display: none;">
+	<img src="mm1.jpg">
+</textarea>
+<xmp style="display: none;">
+	<img src="mm1.jpg">
+</xmp>
+<pre>
+	<img src="mm1.jpg">
+</pre>
+<!-- 
+<xmp>是个很老很特殊的属性，语义为example，示例。据说后来被<pre>标签取代而废止，
+目前，所有的浏览器都是支持的。但是，其跟<pre>标签不能划等号。<pre>里面有个<img>标签，
+显示的则是一张图片，而<xmp>呈现的就是一段HTML代码。
+-->
+<template id="t1">
+	<img src="mm1.jpg">
+</template>
+<!-- 
+<template>标签元素的原本特性，天生display:none,模板元素内部内容是死活不会呈现的
+<template>位置任意性，类似<script>或者<style>标签，可以在<head>中，也可以在<body>或者<frameset>中。
+template.childNodes是空。我们可以使用template.innerHTML获取完整的HTML片段。
+非得获取“伪子元素”，要使用content属性。template.content会返回一个文档片段，
+可以理解为另外一个document，使用document下的一些查询API就可以获得<template>标签里面的“伪子元素”了
+var image_first = template.content.querySelector("img");
+-->
+<script>
+	var template =document.getElementById("t1")
+	var image_first = template.content.querySelector("img");
+	console.log(template.innerHTML)
+	console.log(image_first)
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>动态组件</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+<div id="test">
+  <component v-bind:is="currentView"></component>
+  <component v-bind:is="currentView1"></component>
+  <component v-bind:is="currentView2"></component>
+</div>
+<script>
+  var vm = new Vue({
+  el: '#test',
+  data: {
+    currentView: 'home',
+    currentView1: 'posts',
+    currentView2: 'archive',
+  },
+  components: {
+    home: { template: '<p>Welcome home!</p>' },
+    posts: { template: '<p>Welcome posts!</p>'  },
+    archive: { template: '<p>Welcome archive!</p>'  }
+  }
+})
+</script>
+</body>
+</html>

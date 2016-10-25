@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>X-Templates</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+<script type="text/x-template" id="test">
+  <div><div v-for="i in 10" v-if="i<5">test_by_matisha=>{{i}}</div></div>
+</script>
+<div id="parent">
+    <my-component></my-component>
+</div>
+<script>
+var parent = new Vue({  
+  el: '#parent' ,
+  components: {
+    'my-component': { 
+        template: '#test'
+    }
+  }
+})
+</script>
+</body>
+</html>

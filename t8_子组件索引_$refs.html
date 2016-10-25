@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>子组件索引_$refs</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+<div id="parent">
+  <user-profile ref="profile" v-for="i in 10"></user-profile>
+</div>
+<script>
+Vue.component('user-profile', {
+  template: '\
+    <div>A custom component!</div>'
+})
+var parent = new Vue({ el: '#parent' })
+
+var child = parent.$refs.profile;
+console.log(child)
+</script>
+</body>
+</html>

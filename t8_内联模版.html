@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>内联模版</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+<div id="parent">
+	<my-component inline-template>
+		<!-- <div> -->
+		  <p>These are compiled as the component's own template.</p>
+		  <p>Not parent's transclusion content.</p>
+<!-- 	  </div> -->
+	</my-component>
+</div>
+<script>
+var parent = new Vue({  
+  el: '#parent' ,
+  components: {
+      'my-component': { 
+          // template: '<div>sedftu</div>' 
+      }
+    }
+  })
+</script>
+</body>
+</html>

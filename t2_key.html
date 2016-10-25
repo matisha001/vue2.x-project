@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>列表渲染</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+<div id="watch-example">
+	<div v-for="item  in object" :key="item.id">
+	{{key}}  {{ item }}
+	</div>
+ </div>
+
+<script>
+example1.items = example1.items.filter(function (item) {
+  return item.message.match(/Foo/)
+})
+var watchExampleVM = new Vue({
+  	el: '#watch-example',
+	data: {
+		  object: {
+		      FirstName: 'John',
+		      LastName: 'Doe',
+		      Age: 30
+		  }
+	}
+})
+</script>
+</body>
+</html>

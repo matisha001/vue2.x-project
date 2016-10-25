@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>递归组件</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+<div id="parent">
+    <my-component></my-component>
+</div>
+<script>
+// Vue.component('my-component', {
+//     name: 'my-component',
+//     template: '\
+//     <div>\
+//     <div v-for=" i in 10">test=>{{i}}</div>\
+//     <my-component v-if="Math.random() > 0.5"></my-component>\
+//     </div>'  
+// })
+var parent = new Vue({  
+  el: '#parent' ,
+  components: {
+      'my-component': { 
+          name: 'my-component',
+          template: '<div><div v-for=" i in 2">test=>{{i}}</div><my-component v-if="Math.random() > 0.5"></my-component></div>' 
+      }
+    }
+  })
+</script>
+</body>
+</html>

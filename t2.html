@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>列表渲染</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+<div id="watch-example">
+	<div v-for="(value,key) in object">
+	  {{ key }} : {{ value }}
+	</div>
+	<!-- 	<div v-for="value in object">
+	  {{ key }} : {{ value }}
+	</div> -->
+	<!-- 注意：$key在vuejs2.0中，不能使用，会被报未定义的错误。 -->
+  <div v-bind:class="classObject"></div>
+   <ul>
+ 	  	<li v-for="(value, key, index) in object">{{ index }}. {{ key }} : {{ value }}</li>
+ 	</ul>
+ 	<div>
+	  <span v-for="n in 10">{{ n }}<br></span>
+	</div>
+	<!-- 不能自动传递数据到组件里，因为组件有自己独立的作用域。为了传递迭代数据到组件里，我们要用 props -->
+
+	  <input
+	    v-model.trim="newTodoText"
+	    v-on:keyup.enter="addNewTodo"
+	    placeholder="Add a todo"
+	  >
+	  <ul>
+	    <li
+	      is="todo-item"
+	      v-for="(todo, index) in todos"
+	      v-bind:title="todo"
+	      v-on:remove="todos.splice(index, 1)"
+	    ></li>
+	  </ul>
+	  <ul>
+	  	<li v-for="n in evenNumbers">{{ n }}</li>
+	  </ul>
+	  <div v-for="n in even(numbers)">{{ n }}</div>
+ </div>
+
+<script>
+Vue.component('todo-item', {
+  template: '\
+    <li>{{ title }}<button v-on:click="$emit(\'remove\')">X</button></li>\
+  ',
+  props: ['title']
+})
+var watchExampleVM = new Vue({
+  	el: '#watch-example',
+	data: {
+		  isActive: true,
+		  error: null,
+		  numbers: [ 1, 2, 3, 4, 5 ],
+		  object: {
+		      FirstName: 'John',
+		      LastName: 'Doe',
+		      Age: 30
+		  },
+		      newTodoText: '',
+	    todos: [
+	      'Do the dishes',
+	      'Take out the trash',
+	      'Mow the lawn'
+	    ]
+	},
+	methods: {
+		addNewTodo: function () {
+			this.todos.push(this.newTodoText)
+			this.newTodoText = ''
+		},
+		even: function (numbers) {
+		    return numbers.filter(function (number) {
+		    	return number % 2 === 0
+		    })
+	  	}
+	},
+	computed: {
+	  classObject: function () {
+	    return {
+	      active: this.isActive && !this.error,
+	      'text-danger': this.error && this.error.type === 'fatal',
+	    }
+	  },
+	  evenNumbers: function () {
+	    return this.numbers.filter(function (number) {
+	      return number % 2 === 0
+	    })
+	  }
+	}
+})
+</script>
+</body>
+</html>

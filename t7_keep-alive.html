@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>keep-alive</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+<div id="test">
+<!-- 基本 -->
+<keep-alive>
+  <component :is="currentView"></component>
+</keep-alive>
+<!-- 多个条件判断的子组件 -->
+<keep-alive>
+  <comp-a v-if="a > 1"></comp-a>
+  <comp-b v-else></comp-b>
+</keep-alive>
+<!-- 和 <transition> 一起使用 -->
+<transition>
+  <keep-alive>
+    <component :is="currentView1"></component>
+  </keep-alive>
+</transition>
+</div>
+<script>
+  var vm = new Vue({
+  el: '#test',
+  data: {
+    currentView: 'home',
+    currentView1: 'posts',
+    a: 10,
+  },
+  components: {
+    home: { template: '<p>Welcome home!</p>' },
+    posts: { template: '<p>Welcome posts!</p>' },
+    archive: { template: '<p>Welcome archive!</p>' },
+    "comp-a ":{template: '<p>Welcome comp-a</p>' },
+    "comp-b ":{template: '<p>Welcome comp-b</p>' }
+  }
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>初始渲染的过渡</title>
+  <link href="https://unpkg.com/animate.css@3.5.1/animate.min.css" rel="stylesheet" type="text/css">
+  <script src="vue.js"></script>
+  <style>
+      .custom-active {
+        transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+      }
+      .custom {
+        padding-left: 10px;
+        opacity: 0;
+        transform: rotate(30deg) ;
+      }
+  </style>
+</head>
+<body>
+<div id="example-4">
+  <button @click="show = !show">点击</button>
+  <transition
+    appear
+    v-on:before-appear="customBeforeAppearHook"
+    v-on:appear="customAppearHook"
+    v-on:after-appear="customAfterAppearHook"
+  >
+  <div>
+    
+  </div>
+  </transition>
+</div>
+<script>
+const flipX = Vue.component('flipX', {
+  template: '#page',
+  methods: {
+    enter(el, done) {
+      const tl = new TimelineMax({
+        onComplete: done
+      })      
+      tl.set(el, {
+        autoAlpha: 0,
+        rotationX: 90,
+        transformOrigin: '50% 50%'
+      })
+      tl.to(el, 1, {
+        autoAlpha: 1,
+        rotationX: 0,
+        ease: Power4.easeOut
+      })
+    },
+    leave(el, done) {
+      TweenMax.to(el, 1, {
+        scale: 0,
+        ease: Power4.easeOut,
+        onComplete: done
+      });
+    } 
+  }
+})
+new Vue({
+  el: '#example-4',
+  data: { show: false }
+})
+</script>
+</body>
+</html>

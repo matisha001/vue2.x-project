@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>异步组件</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+<div id="parent">
+  <async-example></async-example>
+</div>
+<script>
+Vue.component('async-example', function (resolve, reject) {
+  setTimeout(function () {
+    resolve({
+      template: '<div>I am async!resolve</div>'
+    })
+  }, 1000)//收到从服务器下载的组件定义时调用
+  setTimeout(function () {
+    resolve({
+      template: '<div>I am async!reject</div>'
+    })
+  }, 2000)//指示加载失败时调用
+})
+var parent = new Vue({ el: '#parent' })
+</script>
+</body>
+</html>

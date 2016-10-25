@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>扩展引入HTML模板</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+<div id="v-model-example">
+	<my-component label="Message" v-model="message"></my-component>
+</div>
+<script type="text/template" id="tpl">
+  <div class="form-group">
+    <label v-bind:for="randomId">{{ label }}:</label>
+    <input v-bind:id="randomId" v-bind:value="value" v-on:input="onInput">
+  </div>
+</script>
+<script>
+var MyComponent = Vue.extend({
+    template: '#tpl',
+    props: ['value', 'label'],
+    data: function () {
+	  return {
+	    randomId: 'input-' + Math.random()
+	  }
+	},
+	methods: {
+	  onInput: function (event) {
+	    this.$emit('input', event.target.value)
+	  }
+	}
+})
+//var myComponentInstance = new MyComponent()
+new Vue({
+  el: '#v-model-example',
+  data: {
+    message: 'hello'
+  },
+  components: {
+    'my-component': MyComponent
+  }
+})
+</script>
+<!-- 
+import template from '../template/list.html'
+
+let list = Vue.extend({
+        template: template 
+})
+ -->
+</body>
+</html>

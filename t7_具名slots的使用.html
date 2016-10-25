@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>具名slots的使用</title>
+  <script src="vue.js"></script>
+  <style scoped>
+    header h1{
+      background: #cccccc;
+      font-size: 12px;
+      font-family: "微软雅黑"
+    }
+    main{
+      background: red;
+    }
+    footer{
+      background: #456789;
+    }
+  </style>
+</head>
+<body>
+  <template id="child01">
+      <div class="container">
+        <header><slot name="header"></slot></header>
+        <main><slot></slot></main>
+        <footer><slot name="footer"></slot></footer>
+      </div>
+</template>
+  <div id="dr01">
+      <app-layout>
+        <h1 slot="header">Here might be a page title</h1>
+        <p>A paragraph for the main content.</p>
+        <p>And another one.</p>
+        <p slot="footer">Here's some contact info</p>
+      </app-layout>
+  </div>
+<script>
+  var child01 = Vue.extend({
+      template: "#child01",
+  });
+ new Vue({
+      el: "#dr01",
+      components: {
+          "app-layout": child01
+      }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+<div id="example-2">
+  <comp :prop-a="1" prop-b="1" ></comp>
+</div>
+<script>
+//prop 是一个对象而不是字符串数组时，它包含验证要求
+Vue.component('comp', {
+  props: {
+    // 基础类型检测 （`null` 意思是任何类型都可以）
+    propA: Number,
+    // 多种类型
+    propB: [String, Number],
+  }
+})
+new Vue({
+  el: '#example-2'
+})
+</script>
+</body>
+</html>

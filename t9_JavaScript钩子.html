@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript钩子</title>
+  <link href="https://unpkg.com/animate.css@3.5.1/animate.min.css" rel="stylesheet" type="text/css">
+  <script src="vue.js"></script>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+<div id="example-4">
+  <button @click="show = !show">点击</button>
+  <transition @before-enter="beforeEnter"  @enter="enter" :css="false">
+    <div><p v-if="show" v-for="i in 5">test_matisha{{i}}</p></div>
+  </transition>
+</div>
+<script>
+new Vue({
+  el: '#example-4',
+  data: { show: false },
+  methods: {
+    beforeEnter: function (el) {
+      el.style.opacity = 0
+    },
+    enter: function (el, done) {
+      Velocity(el, { opacity: .8, fontSize: '1.4em' }, { duration: 300 })
+      Velocity(el, { fontSize: '1.2em' }, { complete: done })
+    }
+  }
+})
+</script>
+</body>
+</html>

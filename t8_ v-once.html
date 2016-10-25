@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>v-once</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+<div id="parent">
+    <my-component></my-component>
+</div>
+<script>
+Vue.component('my-component', {
+  template: '\
+    <div v-once>\
+      <h1>Terms of Service</h1>\
+      a lot of static content\
+    </div>'
+})
+var parent = new Vue({  el: '#parent' })
+</script>
+</body>
+</html>

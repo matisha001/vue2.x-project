@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+<div id="app-6">
+<input type="text" placeholder="123" v-model="message">
+{{a}}
+
+<div v-html="rawHtml"></div>
+<p>Original message: "{{ message }}"</p>
+<p>Computed reversed message: "{{ reversedMessage }}"</p>
+</div>
+<script>
+var data = { a: 1, rawHtml:"<h1>hjdskldskllk</h1>",message: 'Hello'}
+var vm = new Vue({
+  el: '#app-6',
+  data: data,
+  created: function () {
+  	this.$data.a++;
+    console.log('a is: ' + this.a)
+  },
+  computed: {
+    // a computed getter
+    reversedMessage: function () {
+      // `this` points to the vm instance
+      return [this.message.split('').reverse().join(''),Date.now()]
+    },
+    methods: {
+      reverseMessage: function () {
+        return this.message.split('').reverse().join('')
+      }
+    }
+  }
+})
+vm.$data === data // -> true
+vm.$el === document.getElementById('app-6') // -> true
+// $watch 是一个实例方法
+vm.$watch('a', function (newVal, oldVal) {
+  console.log("newVal=>"+newVal+"-----oldVal=>"+oldVal)
+})
+</script>	
+</body>
+</html>

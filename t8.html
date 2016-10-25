@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+<div id="v-model-example">
+  <h1>I'm the parent title</h1>
+  <my-component>
+    <p>This is some original content</p>
+    <p>This is some more original content</p>
+  </my-component>
+</div>
+<script>
+Vue.component('my-input', {
+  template: '\
+    <div class="form-group">\
+      <label v-bind:for="randomId">{{ label }}:</label>\
+      <input v-bind:id="randomId" v-bind:value="value" v-on:input="onInput">\
+    </div>\
+  ',
+  props: ['value', 'label'],
+  data: function () {
+    return {
+      randomId: 'input-' + Math.random()
+    }
+  },
+  methods: {
+    onInput: function (event) {
+      this.$emit('input', event.target.value)
+    }
+  },
+})
+new Vue({
+  el: '#v-model-example',
+  data: {
+    message: 'hello'
+  }
+})
+</script>
+</body>
+</html>

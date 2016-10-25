@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+<div id="v-model-example">
+<voice-recognizer v-model="question"></voice-recognizer>
+<webcam-gesture-reader v-model="gesture"></webcam-gesture-reader>
+<webcam-retinal-scanner v-model="retinalImage"></webcam-retinal-scanner>
+</div>
+<script>
+  Vue.component('voice-recognizer', {
+    template: ' ',
+    props: ['value', 'label'],
+    data: function () {
+      return {
+        randomId: 'input-' + Math.random()
+      }
+    },
+    methods: {
+      onInput: function (event) {
+        this.$emit('input', event.target.value)
+      }
+    },
+  })
+new Vue({
+  el: '#v-model-example',
+  data: {
+    message: 'hello'
+  }
+})
+</script>
+</body>
+</html>
